@@ -1,3 +1,19 @@
-[gd_scene format=3 uid="uid://oewgrydto76a"]
+[gd_scene load_steps=4 format=3 uid="uid://oewgrydto76a"]
+
+[ext_resource type="PackedScene" uid="uid://cicamrigbvm84" path="res://hooky/hooky.tscn" id="1_w7qah"]
+[ext_resource type="Script" path="res://hooky/Hooky.cs" id="2_hl544"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iyypp"]
+size = Vector2(651, 20)
 
 [node name="Game" type="Node2D"]
+
+[node name="Hooky" parent="." instance=ExtResource("1_w7qah")]
+position = Vector2(100, 0)
+script = ExtResource("2_hl544")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(126, 119)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_iyypp")

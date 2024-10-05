@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cicamrigbvm84"]
+
+[ext_resource type="Texture2D" uid="uid://cpooj01jer36j" path="res://icon.svg" id="1_7dl4d"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2bsis"]
+radius = 64.0
+height = 128.0
+
+[node name="Hooky" type="CharacterBody2D"]
+
+[node name="GFX" type="Sprite2D" parent="."]
+texture = ExtResource("1_7dl4d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_2bsis")

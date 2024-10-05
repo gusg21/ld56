@@ -11,9 +11,25 @@ config_version=5
 [application]
 
 config/name="Hooky and Smoochus"
-config/features=PackedStringArray("4.3", "Forward Plus")
+run/main_scene="res://game/game.tscn"
+config/features=PackedStringArray("4.3", "C#", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=200
+window/size/viewport_height=150
+window/size/window_width_override=800
+window/size/window_height_override=600
+window/stretch/mode="viewport"
+window/stretch/aspect="keep_height"
+window/stretch/scale_mode="integer"
 
 [dotnet]
 
 project/assembly_name="Hooky and Smoochus"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+environment/defaults/default_clear_color=Color(0.760784, 1, 1, 1)
