@@ -1,16 +1,28 @@
 [gd_scene load_steps=3 format=3 uid="uid://oewgrydto76a"]
 
+[ext_resource type="Script" path="res://map/MapGraphicsCreator.cs" id="1_8nki1"]
 [ext_resource type="PackedScene" uid="uid://cicamrigbvm84" path="res://player/player.tscn" id="1_krk15"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_iyypp"]
-size = Vector2(651, 20)
 
 [node name="Game" type="Node2D"]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="Map" type="StaticBody2D" parent="."]
 position = Vector2(126, 119)
+script = ExtResource("1_8nki1")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-shape = SubResource("RectangleShape2D_iyypp")
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Map" groups=["map_poly"]]
+position = Vector2(-16, -10)
+polygon = PackedVector2Array(95, -128, 96, 45, -134, 45, -138, -119, 94, -127, 92, -106, 91, -91, -110, -91, -99.3099, 29.6665, 79, 28)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map" groups=["map_poly"]]
+polygon = PackedVector2Array(-75, -16, -71, -1, -44, -2, -45, -23)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Map" groups=["map_poly"]]
+position = Vector2(60, -41)
+polygon = PackedVector2Array(-74, -6, -84, 18, -12, 22, -12, -3, -43, 9)
 
 [node name="Hooky2" parent="." instance=ExtResource("1_krk15")]
+position = Vector2(40, 53)
+
+[node name="Hooky3" parent="." instance=ExtResource("1_krk15")]
+position = Vector2(129, -13)
+Type = 1

@@ -29,6 +29,10 @@ window/stretch/scale_mode="integer"
 
 project/assembly_name="Hooky and Smoochus"
 
+[global_group]
+
+map_poly="All CollisionPolygon2D's that should be counted as map solids."
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
