@@ -1,8 +1,15 @@
 using Godot;
 using System;
 
-public partial class Hooky : CharacterBody2D
+public enum PlayerType {
+    HOOKY, SMOOCHUS
+}
+
+public partial class Player : CharacterBody2D
 {
+    [Export]
+    public PlayerType Type;
+
     public override void _Ready()
     {
         base._Ready();
