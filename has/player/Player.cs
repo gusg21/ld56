@@ -11,6 +11,10 @@ public partial class Player : CharacterBody2D
     [Export]
     public PlayerType Type;
 
+    [ExportGroup("Movement")]
+    [Export]
+    public float MoveSpeed = 4.0f;
+
     private Sprite2D _gfx;
 
     public override void _Ready()
@@ -38,12 +42,18 @@ public partial class Player : CharacterBody2D
     {
         base._PhysicsProcess(delta);
 
-        Velocity += new Vector2(0, 9.8f);
+        Vector2 velocity = Velocity;
 
+        // Horizontal movement
+        velocity.X = Input.GetAxis("move_left", "move_right") * MoveSpeed;
+
+        // Gravity 
+        if (!IsOnFloor()) {
+            velocity += new Vector2(0, 9.8f);
+        }
+
+        // Move
+        Velocity = velocity;
         MoveAndSlide();
-
-        // if (IsOnFloor()) {
-        //     GD.Print("FUICK");
-        // }
     }
 }

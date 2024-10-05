@@ -32,7 +32,8 @@ public partial class MapGraphicsCreator : Node
                 {
                     Polygon = collisionPoly.Polygon,
                     Color = Color.FromHsv((float)GD.RandRange(0.0, 1.0), 0.6f, 0.7f, 1.0f),
-                    Transform = collisionPoly.Transform
+                    Transform = collisionPoly.Transform,
+                    Antialiased = true
                 };
                 AddChild(newVisualPoly);
             }

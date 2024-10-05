@@ -9,6 +9,7 @@ height = 1.0
 
 [node name="Hooky" type="CharacterBody2D"]
 script = ExtResource("1_qtgqo")
+MoveSpeed = 20.0
 
 [node name="GFX" type="Sprite2D" parent="."]
 texture = ExtResource("2_7p5ow")
