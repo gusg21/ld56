@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://b14vdv26mxs3a"]
+
+[ext_resource type="Texture2D" uid="uid://wd8ccpl3qhj2" path="res://fx/cloud1.png" id="1_m3dx5"]
+
+[node name="BgFx1" type="Node2D"]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 160
+lifetime = 400.0
+preprocess = 248.48
+randomness = 0.32
+texture = ExtResource("1_m3dx5")
+emission_shape = 3
+emission_rect_extents = Vector2(1, 400)
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 10.0
+scale_amount_min = 0.1

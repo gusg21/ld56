@@ -8,7 +8,7 @@ using System.Linq;
 public partial class TheCapturer : Camera2D
 {
     [Export]
-    public float MaxZoom = 2f;
+    public float MaxZoom = 1f;
 
     private float Aspect = 0f;
     private Vector2 Size;

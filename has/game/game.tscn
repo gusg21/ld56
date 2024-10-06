@@ -1,8 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://oewgrydto76a"]
+[gd_scene load_steps=9 format=3 uid="uid://oewgrydto76a"]
 
 [ext_resource type="Script" path="res://map/MapGraphicsCreator.cs" id="1_8nki1"]
 [ext_resource type="PackedScene" uid="uid://cicamrigbvm84" path="res://player/player.tscn" id="1_krk15"]
 [ext_resource type="Script" path="res://camera/TheCapturer.cs" id="3_qphn8"]
+[ext_resource type="PackedScene" uid="uid://b14vdv26mxs3a" path="res://fx/bg_fx1.tscn" id="4_8k1gj"]
+[ext_resource type="Texture2D" uid="uid://qtrs7tkgr37m" path="res://decals/decal1.png" id="5_ny2d6"]
+[ext_resource type="Texture2D" uid="uid://8ckahqqh0wpk" path="res://decals/grass1.png" id="6_hkycy"]
+[ext_resource type="Texture2D" uid="uid://bw0l8qq31phck" path="res://decals/grave1.png" id="7_l4dsi"]
+[ext_resource type="Texture2D" uid="uid://2usyt0relwox" path="res://decals/dangles.png" id="8_dogjb"]
 
 [node name="Game" type="Node2D"]
 
@@ -29,10 +34,12 @@ polygon = PackedVector2Array(-74, -6, -84, 18, -12, 22, -12, -3, -43, 9)
 
 [node name="Hooky2" parent="." instance=ExtResource("1_krk15")]
 position = Vector2(74, 484)
+MoveSpeed = 100.0
 
 [node name="Hooky3" parent="." instance=ExtResource("1_krk15")]
 position = Vector2(159, 484)
 Type = 1
+MoveSpeed = 100.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 limit_left = -10
@@ -41,3 +48,63 @@ limit_right = 800
 limit_bottom = 600
 editor_draw_limits = true
 script = ExtResource("3_qphn8")
+
+[node name="BgFx1" parent="." instance=ExtResource("4_8k1gj")]
+z_index = -1
+z_as_relative = false
+position = Vector2(-245, 258)
+
+[node name="Decal3" type="Sprite2D" parent="."]
+position = Vector2(235, 36.9998)
+rotation = 0.454035
+texture = ExtResource("5_ny2d6")
+
+[node name="Decal4" type="Sprite2D" parent="."]
+position = Vector2(-33, 388)
+rotation = -1.79171
+texture = ExtResource("5_ny2d6")
+
+[node name="Decal5" type="Sprite2D" parent="."]
+position = Vector2(737, 497)
+rotation = -1.79171
+texture = ExtResource("5_ny2d6")
+
+[node name="Decal6" type="Sprite2D" parent="."]
+position = Vector2(748, 439)
+rotation = 1.34055
+texture = ExtResource("5_ny2d6")
+
+[node name="Decal2" type="Sprite2D" parent="."]
+position = Vector2(349, 247)
+rotation = 2.24574
+texture = ExtResource("5_ny2d6")
+
+[node name="Decal1" type="Sprite2D" parent="."]
+position = Vector2(334, 473)
+rotation = 0.298741
+texture = ExtResource("5_ny2d6")
+
+[node name="Grass1" type="Sprite2D" parent="."]
+position = Vector2(404, 344)
+rotation = 0.44214
+texture = ExtResource("6_hkycy")
+
+[node name="Grass2" type="Sprite2D" parent="."]
+position = Vector2(450, 366)
+rotation = 0.44214
+texture = ExtResource("6_hkycy")
+
+[node name="Grave1" type="Sprite2D" parent="."]
+position = Vector2(146, 316)
+rotation = -0.0219611
+texture = ExtResource("7_l4dsi")
+
+[node name="Dangles" type="Sprite2D" parent="."]
+position = Vector2(450, 316)
+rotation = 0.0529375
+texture = ExtResource("8_dogjb")
+
+[node name="Dangles2" type="Sprite2D" parent="."]
+position = Vector2(553, 115)
+rotation = 0.0409477
+texture = ExtResource("8_dogjb")

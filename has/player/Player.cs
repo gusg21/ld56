@@ -9,6 +9,7 @@ public enum CharacterType
 
 public partial class Player : CharacterBody2D
 {
+    
     [Export]
     public CharacterType Type;
 
