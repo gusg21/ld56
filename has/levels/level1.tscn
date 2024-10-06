@@ -32,8 +32,18 @@ polygon = PackedVector2Array(-107, -14, -101.333, 5.33333, -49, 3.33333, -42, -1
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Map" groups=["map_poly"]]
 z_index = 1
-position = Vector2(50, -48.3333)
-polygon = PackedVector2Array(-74, -6, -84, 18, -12, 22, -12, -3, -43, 9)
+position = Vector2(42.6667, -47.3333)
+polygon = PackedVector2Array(-84, 18, -40.3333, 20.3333, -21.6667, -3.66666, -43, 9)
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="Map" groups=["map_poly"]]
+z_index = 1
+position = Vector2(132, -50.3333)
+polygon = PackedVector2Array(-64.6667, -1.00001, -32.3333, 7.33333, 4.33334, 45.3333, 7.33334, 11, 9, -6.00001)
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="Map" groups=["map_poly"]]
+z_index = 1
+position = Vector2(73, 6.66667)
+polygon = PackedVector2Array(-30.3333, -3, -24.3333, 8, -16.6667, 8, 9.33333, -2.66666)
 
 [node name="Hooky2" parent="." instance=ExtResource("2_4u5ap")]
 position = Vector2(74, 484)
