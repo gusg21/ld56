@@ -14,6 +14,7 @@ public partial class TheCapturer : Camera2D
     private Vector2 Size;
 
     private Rect2 IdealRect;
+    
 
     public override void _EnterTree()
     {
@@ -41,7 +42,7 @@ public partial class TheCapturer : Camera2D
         }
         center /= nodes.Length;
 
-        GD.Print("Containment size: " + containmentSize.ToString());
+        // GD.Print("Containment size: " + containmentSize.ToString());
 
         // Determine ideal size
         float verticalRange = containmentSize.Size.Y;

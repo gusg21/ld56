@@ -46,13 +46,11 @@ position = Vector2(73, 6.66667)
 polygon = PackedVector2Array(-30.3333, -3, -24.3333, 8, -16.6667, 8, 9.33333, -2.66666)
 
 [node name="Hooky2" parent="." instance=ExtResource("2_4u5ap")]
-position = Vector2(74, 484)
-MoveSpeed = 100.0
+position = Vector2(369, 344)
 
 [node name="Hooky3" parent="." instance=ExtResource("2_4u5ap")]
-position = Vector2(159, 484)
+position = Vector2(276, 339)
 Type = 1
-MoveSpeed = 100.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 limit_left = -600
