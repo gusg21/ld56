@@ -4,10 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://sk120f2qs575" path="res://player/hooky.png" id="2_7p5ow"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2bsis"]
-radius = 0.5
-height = 1.0
+radius = 1.5
+height = 3.0
 
-[node name="Hooky" type="CharacterBody2D"]
+[node name="Hooky" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_qtgqo")
 MoveSpeed = 20.0
 
