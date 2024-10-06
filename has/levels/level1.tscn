@@ -18,12 +18,12 @@ script = ExtResource("1_0hipu")
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="Map" groups=["map_poly"]]
 position = Vector2(-16, -10)
-polygon = PackedVector2Array(178.333, -299.333, 571, -280.667, 566, 403, -337.667, 409, -354, -308.333, 130.667, -290.667, 349.667, -257, 169, -80.6667, -110, -91, -110, 62.6667, 107, 55.6667, 108, 37.3333, 127.667, 35.6667, 130, 14.6667, 151.667, 12.3333)
+polygon = PackedVector2Array(178.333, -299.333, 571, -280.667, 566, 403, -337.667, 409, -354, -308.333, 130.667, -290.667, 185, -299, 264.333, -77.6667, -110, -91, -110, 62.6667, 107, 55.6667, 108, 37.3333, 127.667, 35.6667, 130, 14.6667, 152.333, 14.6667)
 
 [node name="CollisionShape2D2" type="CollisionPolygon2D" parent="Map" groups=["map_poly"]]
 z_index = 1
 position = Vector2(-16, -10)
-polygon = PackedVector2Array(-2.33333, 6, 51, 31.3333, 57, 66, -40.6667, 64.6667, -50, 48.6667, -25, 45, -28.6667, 33.3333, -13.3333, 31.6667)
+polygon = PackedVector2Array(-2.33333, 6, 51, 31.3333, 57, 66, -40.6667, 64.6667, -50, 48.6667, -25, 45, -28.6667, 33.3333, -13.3333, 31.6667, -9, 8.66666)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map" groups=["map_poly"]]
 z_index = 1
@@ -38,17 +38,17 @@ polygon = PackedVector2Array(-84, 18, -40.3333, 20.3333, -21.6667, -3.66666, -43
 [node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="Map" groups=["map_poly"]]
 z_index = 1
 position = Vector2(132, -50.3333)
-polygon = PackedVector2Array(-64.6667, -1.00001, -32.3333, 7.33333, 4.33334, 45.3333, 7.33334, 11, 9, -6.00001)
+polygon = PackedVector2Array(-64.6667, -1.00001, -34.3333, 10.6666, 17.3333, 31.6666, 9.33334, 11, 34, -8.00003)
 
 [node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="Map" groups=["map_poly"]]
 z_index = 1
 position = Vector2(73, 6.66667)
 polygon = PackedVector2Array(-30.3333, -3, -24.3333, 8, -16.6667, 8, 9.33333, -2.66666)
 
-[node name="Hooky2" parent="." instance=ExtResource("2_4u5ap")]
+[node name="Hooky" parent="." instance=ExtResource("2_4u5ap")]
 position = Vector2(369, 344)
 
-[node name="Hooky3" parent="." instance=ExtResource("2_4u5ap")]
+[node name="Smoochus" parent="." instance=ExtResource("2_4u5ap")]
 position = Vector2(276, 339)
 Type = 1
 
