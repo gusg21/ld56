@@ -16,6 +16,8 @@ public partial class Player : CharacterBody2D
     [ExportGroup("Movement")]
     [Export]
     public float MoveSpeed = 20.0f;
+    [Export]
+    public float JumpHeight = 300.0f;
 
     private Sprite2D _gfx;
 
@@ -54,49 +56,56 @@ public partial class Player : CharacterBody2D
     public override void _PhysicsProcess(double delta)
     {
         base._PhysicsProcess(delta);
+        
+        Vector2 velocity = Velocity;
 
         switch (GameManager.I.GetPlayerIDByCharacterType(Type))
         {
             case PlayerID.ONE:
-                P1DoMovement();
+                velocity = P1GetInput(velocity);
                 break;
             case PlayerID.TWO:
-                P2DoMovement();
+                velocity = P2GetInput(velocity);
                 break;
         }
+        
+        // Gravity 
+        if (!IsOnFloor()) {
+            velocity += new Vector2(0, 9.8f);
+        }
+        
+        // Move
+        Velocity = velocity;
         
         MoveAndSlide();
     }
 
-    public void P1DoMovement()
+    public Vector2 P1GetInput(Vector2 velocity)
     {
-        Vector2 velocity = Velocity;
-
+        Vector2 newVelocity = velocity;
         // Horizontal movement
-        velocity.X = Input.GetAxis("move_left_p1", "move_right_p1") * MoveSpeed;
+        newVelocity.X = Input.GetAxis("move_left_p1", "move_right_p1") * MoveSpeed;
 
-        // Gravity 
-        if (!IsOnFloor()) {
-            velocity += new Vector2(0, 9.8f);
+        if (IsOnFloor() && Input.IsActionPressed("jump_p1"))
+        {
+            newVelocity.Y -= JumpHeight;
         }
 
-        // Move
-        Velocity = velocity;
+        return newVelocity;
     }
 
-    public void P2DoMovement()
+    public Vector2 P2GetInput(Vector2 velocity)
     {
-        Vector2 velocity = Velocity;
+        Vector2 newVelocity = velocity;
 
         // Horizontal movement
-        velocity.X = Input.GetAxis("move_left_p2", "move_right_p2") * MoveSpeed;
-
-        // Gravity 
-        if (!IsOnFloor()) {
-            velocity += new Vector2(0, 9.8f);
+        newVelocity.X = Input.GetAxis("move_left_p2", "move_right_p2") * MoveSpeed;
+        
+        if (IsOnFloor() && Input.IsActionPressed("jump_p2"))
+        {
+            newVelocity.Y -= JumpHeight;
         }
 
-        // Move
-        Velocity = velocity;
+        return newVelocity;
     }
 }
