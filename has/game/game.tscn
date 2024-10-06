@@ -18,17 +18,20 @@ script = ExtResource("1_8nki1")
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="Map" groups=["map_poly"]]
 position = Vector2(-16, -10)
-polygon = PackedVector2Array(183.667, -119, 146.667, 89.3333, -142, 92.6667, -138, -119, 151, -133.667, 182.333, -118.333, 169, -80.6667, -110, -91, -110, 62.6667, 107, 55.6667)
+polygon = PackedVector2Array(178.333, -299.333, 571, -280.667, 566, 403, -337.667, 409, -354, -308.333, 130.667, -290.667, 349.667, -257, 169, -80.6667, -110, -91, -110, 62.6667, 107, 55.6667, 108, 37.3333, 127.667, 35.6667, 130, 14.6667, 151.667, 12.3333)
 
 [node name="CollisionShape2D2" type="CollisionPolygon2D" parent="Map" groups=["map_poly"]]
+z_index = 1
 position = Vector2(-16, -10)
 polygon = PackedVector2Array(-2.33333, 6, 51, 31.3333, 57, 66, -40.6667, 64.6667, -50, 48.6667, -25, 45, -28.6667, 33.3333, -13.3333, 31.6667)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map" groups=["map_poly"]]
+z_index = 1
 position = Vector2(-26.3333, 20)
 polygon = PackedVector2Array(-107, -14, -101.333, 5.33333, -49, 3.33333, -42, -10.6667, -22.3333, -14.6667, -12.6667, -27.3333, -76.6667, -26, -104.667, -51)
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Map" groups=["map_poly"]]
+z_index = 1
 position = Vector2(50, -48.3333)
 polygon = PackedVector2Array(-74, -6, -84, 18, -12, 22, -12, -3, -43, 9)
 
@@ -42,10 +45,10 @@ Type = 1
 MoveSpeed = 100.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
-limit_left = -10
-limit_top = -20
-limit_right = 800
-limit_bottom = 600
+limit_left = -600
+limit_top = -400
+limit_right = 2000
+limit_bottom = 1500
 editor_draw_limits = true
 script = ExtResource("3_qphn8")
 

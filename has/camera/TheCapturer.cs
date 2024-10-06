@@ -10,7 +10,7 @@ public partial class TheCapturer : Camera2D
     [Export]
     public float MaxZoom = 1f;
 
-    private float Aspect = 0f;
+    private float Aspect = 4.0f/3.0f;
     private Vector2 Size;
 
     private Rect2 IdealRect;
@@ -19,8 +19,8 @@ public partial class TheCapturer : Camera2D
     {
         base._Ready();
 
-        Size = GetViewportRect().Size;
-        Aspect = Size.Aspect();
+        Size = new Vector2(600, 450);
+        // Aspect = Size.Aspect();
     }
 
     public void FitNodes(Node2D[] nodes)
@@ -53,10 +53,12 @@ public partial class TheCapturer : Camera2D
             idealSize.X = verticalRange * Aspect;
             idealSize.Y = verticalRange;
         }
-        if (horizontalRange * (1.0f / Aspect) > verticalRange) {
+        else if (horizontalRange * (1.0f / Aspect) > verticalRange) {
             idealSize.X = horizontalRange;
             idealSize.Y = horizontalRange * (1.0f / Aspect);
         }
+
+        idealSize.X = idealSize.Y * Aspect;
 
         const float paddingPixels = 200.0f;
         idealSize += Vector2.One * paddingPixels;
@@ -68,9 +70,9 @@ public partial class TheCapturer : Camera2D
 
         Vector2 idealZoom = new Vector2(
             Size.X / IdealRect.Size.X,
-            Size.Y / IdealRect.Size.Y
+            Size.X / IdealRect.Size.X
         );
-        idealZoom = idealZoom.Clamp(1.0f, MaxZoom);
+        idealZoom = idealZoom.Clamp(0.2f, MaxZoom);
         Zoom = Zoom.Lerp(idealZoom, 0.1f);
 
         // QueueRedraw();
