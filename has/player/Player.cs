@@ -9,6 +9,9 @@ public enum CharacterType
 
 public partial class Player : CharacterBody2D
 {
+    public static Color HookyColor = new("de2866");
+    public static Color SmoochusColor = new("28dea1");
+
     private static Player Hooky;
     private static Player Smoochus;
 
@@ -24,10 +27,15 @@ public partial class Player : CharacterBody2D
     public float JumpHeight = 350.0f;
 
     private Sprite2D _gfx;
+    private CpuParticles2D _parts;
+    private Line2D _rope;
+
     private bool _isHooked;
     private float _ropeLength;
     private bool _isStuck;
     private float _angularVelocity;
+    private bool _canAct = false;
+    private float _timeSinceGround = 0f;
 
     public override void _Ready()
     {
@@ -48,19 +56,31 @@ public partial class Player : CharacterBody2D
 
         // Acquire references
         _gfx = GetNode<Sprite2D>("GFX");
+        _parts = GetNode<CpuParticles2D>("Parts");
+        _rope = GetNode<Line2D>("Rope");
+        _rope.AddPoint(Vector2.Zero);
+        _rope.AddPoint(Vector2.Zero);
 
         // Update graphics
         Texture2D texture = null;
+        Color color = new();
         switch (Type)
         {
             case CharacterType.HOOKY:
                 texture = GD.Load<Texture2D>("res://player/hooky.png");
+                color = HookyColor;
                 break;
             case CharacterType.SMOOCHUS:
                 texture = GD.Load<Texture2D>("res://player/smoochus.png");
+                color = SmoochusColor;
                 break;
         }
         _gfx.Texture = texture;
+
+        // Set particle colors
+        _parts.ColorRamp = new Gradient();
+        _parts.ColorRamp.SetColor(0, color);
+        _parts.ColorRamp.SetColor(1, new Color(color, 0));
     }
 
     public override void _PhysicsProcess(double delta)
@@ -90,6 +110,16 @@ public partial class Player : CharacterBody2D
         if (!IsOnFloor())
         {
             velocity += new Vector2(0, 13f);
+            _timeSinceGround += (float)delta;
+        }
+        else
+        {
+            if (_isHooked)
+            {
+                _isHooked = false;
+            }
+            _canAct = true;
+            _timeSinceGround = 0;
         }
 
         if (_isStuck)
@@ -102,9 +132,19 @@ public partial class Player : CharacterBody2D
 
         MoveAndSlide();
 
+        // Bonk
         if (IsOnCeiling())
         {
             Velocity = new Vector2(Velocity.X, 0);
+        }
+
+        // Visuals
+        _parts.Emitting = _canAct;
+        _rope.Visible = _isHooked;
+        if (_isHooked)
+        {
+            _rope.SetPointPosition(0, Vector2.Zero);
+            _rope.SetPointPosition(1, ToLocal(Smoochus.GlobalPosition));
         }
     }
 
@@ -114,7 +154,7 @@ public partial class Player : CharacterBody2D
         {
             case PlayerID.ONE:
                 {
-                    if (Input.IsActionJustPressed("act_p1"))
+                    if (Input.IsActionJustPressed("act_p1") && _canAct && !IsOnFloor())
                     {
                         _isHooked = true;
                         _angularVelocity = 0;
@@ -123,19 +163,21 @@ public partial class Player : CharacterBody2D
                     else if (Input.IsActionJustReleased("act_p1"))
                     {
                         _isHooked = false;
+                        _canAct = false;
                     }
                     break;
                 }
 
             case PlayerID.TWO:
                 {
-                    if (Input.IsActionJustPressed("act_p2"))
+                    if (Input.IsActionJustPressed("act_p2") && _canAct)
                     {
                         _isStuck = true;
                     }
                     else if (Input.IsActionJustReleased("act_p2"))
                     {
                         _isStuck = false;
+                        _canAct = false;
                     }
                     break;
                 }
@@ -164,9 +206,9 @@ public partial class Player : CharacterBody2D
         switch (GameManager.I.GetPlayerIDByCharacterType(Type))
         {
             case PlayerID.ONE:
-                return Input.IsActionPressed("jump_p1");
+                return Input.IsActionJustPressed("jump_p1");
             case PlayerID.TWO:
-                return Input.IsActionPressed("jump_p2");
+                return Input.IsActionJustPressed("jump_p2");
         }
 
         return false;
@@ -190,7 +232,7 @@ public partial class Player : CharacterBody2D
             newVelocity.X *= 0.9f;
         }
 
-        if (IsOnFloor() && WasJumpPressed())
+        if (_timeSinceGround < 0.2f && WasJumpPressed())
         {
             newVelocity.Y -= JumpHeight;
         }
@@ -200,38 +242,34 @@ public partial class Player : CharacterBody2D
 
     public Vector2 Swing(Vector2 velocity)
     {
-
-        if (_isHooked)
+        var param = PhysicsRayQueryParameters2D.Create(GlobalPosition, Smoochus.GlobalPosition, uint.MaxValue, new Godot.Collections.Array<Rid>() { Smoochus.GetRid(), Hooky.GetRid() });
+        var results = GetWorld2D().DirectSpaceState.IntersectRay(
+            param
+        );
+        if (results.Count > 0)
         {
-            var param = PhysicsRayQueryParameters2D.Create(GlobalPosition, Smoochus.GlobalPosition, uint.MaxValue, new Godot.Collections.Array<Rid>() { Smoochus.GetRid(), Hooky.GetRid() });
-            var results = GetWorld2D().DirectSpaceState.IntersectRay(
-                param
-            );
-            if (results.Count > 0)
-            {
-                GD.Print(results["position"]);
-            }
-
-            velocity = Vector2.Zero;
-
-            Vector2 toHook = Smoochus.GlobalPosition - GlobalPosition;
-            Vector2 radius = GlobalPosition - Smoochus.GlobalPosition;
-
-            _angularVelocity += toHook.X * 0.3f;
-
-            velocity += -toHook.Orthogonal().Normalized() * _angularVelocity;
-
-            if (toHook.Length() < 5.0f)
-            {
-                _isHooked = false;
-            }
-
-            // velocity += velocity.Normalized() * toHook.Orthogonal();
-
-            GlobalPosition = Smoochus.GlobalPosition + radius.Normalized() * _ropeLength;
-
-            // velocity += toHook.Normalized() * 4;
+            GD.Print(results["position"]);
         }
+
+        velocity = Vector2.Zero;
+
+        Vector2 toHook = Smoochus.GlobalPosition - GlobalPosition;
+        Vector2 radius = GlobalPosition - Smoochus.GlobalPosition;
+
+        _angularVelocity += toHook.X * 0.3f;
+
+        velocity += -toHook.Orthogonal().Normalized() * _angularVelocity;
+
+        if (toHook.Length() < 5.0f)
+        {
+            _isHooked = false;
+        }
+
+        // velocity += velocity.Normalized() * toHook.Orthogonal();
+
+        GlobalPosition = Smoochus.GlobalPosition + radius.Normalized() * _ropeLength;
+
+        // velocity += toHook.Normalized() * 4;
 
         return velocity;
     }

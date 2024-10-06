@@ -76,17 +76,17 @@ rotation = -1.79171
 texture = ExtResource("5_8skjr")
 
 [node name="Decal5" type="Sprite2D" parent="."]
-position = Vector2(737, 497)
+position = Vector2(721, 482)
 rotation = -1.79171
 texture = ExtResource("5_8skjr")
 
 [node name="Decal6" type="Sprite2D" parent="."]
-position = Vector2(748, 439)
+position = Vector2(772, 418)
 rotation = 1.34055
 texture = ExtResource("5_8skjr")
 
 [node name="Decal2" type="Sprite2D" parent="."]
-position = Vector2(349, 247)
+position = Vector2(772, 245)
 rotation = 2.24574
 texture = ExtResource("5_8skjr")
 
@@ -111,7 +111,7 @@ rotation = -0.0219611
 texture = ExtResource("7_al6vr")
 
 [node name="Dangles" type="Sprite2D" parent="."]
-position = Vector2(450, 316)
+position = Vector2(370, 316)
 rotation = 0.0529375
 texture = ExtResource("8_xmpcg")
 
